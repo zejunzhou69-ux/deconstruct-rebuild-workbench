@@ -3,6 +3,9 @@ __pycache__/
 *.pyc
 *.pyo
 
+# jianying 素材归一化缓存（任何位置）
+__jycache__/
+
 # 工作台运行时输出
 workbench/成品/
 workbench/specs/_*/
