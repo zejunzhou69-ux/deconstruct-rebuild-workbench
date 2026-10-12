@@ -7,7 +7,7 @@
 - **来源**：https://github.com/luoluoluo22/jianying-editor
 - **许可证**：MIT License
 - **版权**：Copyright (c) 2026 luoluoluo22
-- **许可全文**：见仓库根目录 [`LICENSE`](LICENSE)（原样保留，未作任何修改）
+- **许可全文**：见 [`jianying-editor/LICENSE`](jianying-editor/LICENSE)（原样保留，未作任何修改）
 
 该目录下的源码为**原样引入**，未做功能性改动；仅剔除了运行时缓存目录
 （`assets/__jycache__/`、`data/jy_cached_audio.csv`）以保持仓库干净。

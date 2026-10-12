@@ -128,3 +128,5 @@ python workbench\workbench.py replicate "workbench\specs\ref_demo_spec.json" "wo
 | `jianying-editor/` 技能本体 | MIT | [luoluoluo22](https://github.com/luoluoluo22) |
 | `scripts/vendor/pyJianYingDraft/` | Apache-2.0 | [GuanYixuan](https://github.com/GuanYixuan) |
 | `workbench/` 对标复刻流水线 | MIT（本仓库新增部分） | dr-workbench 贡献者 |
+
+仓库根目录的 `LICENSE` 覆盖 `workbench/` 新增部分；第三方组件的原始 LICENSE 与版权声明在各自目录下原样保留。
