@@ -11,6 +11,10 @@ workbench/成品/
 workbench/specs/_*/
 *.log
 
+# 网页版运行时数据
+workbench/web_uploads/
+workbench/web_out/
+
 # jianying-editor 运行时缓存（技能运行时会再生成）
 jianying-editor/assets/__jycache__/
 jianying-editor/data/jy_cached_audio.csv

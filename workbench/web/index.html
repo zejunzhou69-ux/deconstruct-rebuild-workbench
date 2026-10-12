@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>对标复刻工作台</title>
+<style>
+  :root {
+    --bg: #f5f4f0;
+    --card: #ffffff;
+    --border: #e3e1d8;
+    --text: #2c2c2a;
+    --muted: #6f6e68;
+    --teal: #0f6e56;
+    --teal-light: #e1f5ee;
+    --amber: #854f0b;
+    --red: #a32d2d;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.6;
+    padding: 24px 16px 64px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  header h1 { font-size: 22px; font-weight: 600; }
+  header p { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px; margin-top: 16px;
+  }
+  .card h2 { font-size: 15px; font-weight: 600; margin-bottom: 14px; }
+  .step { font-size: 12px; color: var(--teal); font-weight: 600; margin-right: 6px; }
+  .row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+  .row label { width: 92px; font-size: 13px; color: var(--muted); flex-shrink: 0; }
+  .row .grow { flex: 1; min-width: 220px; }
+  input[type=text], textarea {
+    width: 100%; border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 10px; font-size: 13px; font-family: inherit;
+    background: #fbfbf9; color: var(--text);
+  }
+  input[type=text]:focus, textarea:focus { outline: 2px solid var(--teal-light); border-color: var(--teal); }
+  textarea { min-height: 72px; resize: vertical; }
+  .file-btn {
+    display: inline-block; border: 1px dashed var(--teal); color: var(--teal);
+    background: var(--teal-light); border-radius: 8px; padding: 7px 14px;
+    font-size: 13px; cursor: pointer; transition: background .15s;
+  }
+  .file-btn:hover { background: #cdeadb; }
+  .file-btn input { display: none; }
+  .file-name { font-size: 12px; color: var(--muted); }
+  .file-name.ok { color: var(--teal); font-weight: 500; }
+  .hint { font-size: 12px; color: var(--muted); margin: -4px 0 14px 102px; }
+  .run-btn {
+    width: 100%; border: none; border-radius: 10px; padding: 13px;
+    background: var(--teal); color: #fff; font-size: 15px; font-weight: 600;
+    cursor: pointer; margin-top: 6px;
+  }
+  .run-btn:disabled { background: #9db8b0; cursor: not-allowed; }
+  pre#log {
+    background: #1e1e1c; color: #b8ddc9; border-radius: 10px;
+    padding: 14px; font-size: 12px; line-height: 1.7;
+    font-family: Consolas, "Cascadia Mono", monospace;
+    max-height: 300px; overflow-y: auto; white-space: pre-wrap; word-break: break-all;
+  }
+  .badge { display: inline-block; font-size: 12px; padding: 2px 10px; border-radius: 99px; margin-left: 8px; vertical-align: middle; }
+  .badge.running { background: #faeeDA; color: var(--amber); }
+  .badge.done { background: var(--teal-light); color: var(--teal); }
+  .badge.error { background: #fceBEB; color: var(--red); }
+  video { width: 100%; border-radius: 10px; background: #000; margin-top: 4px; }
+  .dl {
+    display: inline-block; margin-top: 12px; text-decoration: none;
+    background: var(--teal); color: #fff; border-radius: 8px;
+    padding: 8px 18px; font-size: 13px; font-weight: 500;
+  }
+  .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  table.hist { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.hist td { padding: 7px 4px; border-bottom: 1px solid var(--border); }
+  table.hist tr:last-child td { border-bottom: none; }
+  table.hist .sz { color: var(--muted); font-size: 12px; white-space: nowrap; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>对标复刻工作台</h1>
+    <p>丢一个对标视频，提要求，喂素材 —— 拆解手法、复刻成片，一条龙。</p>
+  </header>
+
+  <div class="card">
+    <h2><span class="step">第一步</span>丢素材、提要求</h2>
+
+    <div class="row">
+      <label>对标视频</label>
+      <label class="file-btn">选择视频<input type="file" id="ref" accept="video/*"></label>
+      <span class="file-name" id="ref-name">必选，参考它的剪辑手法</span>
+    </div>
+
+    <div class="row">
+      <label>我的素材</label>
+      <label class="file-btn">选择多个文件<input type="file" id="footage" multiple accept="video/*,image/*"></label>
+      <span class="file-name" id="footage-name">必选，拍好/收集好的视频或图片</span>
+    </div>
+
+    <div class="row">
+      <label>背景音乐</label>
+      <label class="file-btn">选择音频<input type="file" id="bgm" accept="audio/*"></label>
+      <span class="file-name" id="bgm-name">可选，不给就自动生成氛围乐</span>
+    </div>
+
+    <div class="row">
+      <label>成片标题</label>
+      <div class="grow"><input type="text" id="title" placeholder="我的复刻作品"></div>
+    </div>
+
+    <div class="row">
+      <label>片尾文字</label>
+      <div class="grow"><input type="text" id="end" placeholder="感谢观看"></div>
+    </div>
+
+    <div class="row">
+      <label>旁白文案</label>
+      <div class="grow"><textarea id="narration" placeholder="写下旁白，自动拆句、AI 配音、逐句对齐字幕；留空则只出画面+BGM"></textarea></div>
+    </div>
+    <div class="hint">画幅（横/竖屏）、镜头数、转场、字幕样式自动跟随对标视频</div>
+
+    <button class="run-btn" id="run">开始复刻</button>
+  </div>
+
+  <div class="card hidden" id="log-card">
+    <h2>运行日志 <span class="badge running" id="log-badge">进行中</span></h2>
+    <pre id="log"></pre>
+  </div>
+
+  <div class="card hidden" id="result-card">
+    <h2>成片</h2>
+    <video id="player" controls preload="metadata"></video>
+    <div>
+      <a class="dl" id="download" download>下载 MP4</a>
+    </div>
+    <p class="note">剪映草稿已同步生成：重启剪映客户端，在草稿列表找到对应标题即可继续精修。</p>
+  </div>
+
+  <div class="card">
+    <h2>历史产物</h2>
+    <div id="hist"><p class="note">还没有产物。</p></div>
+  </div>
+
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const JOB = (() => {
+  let j = localStorage.getItem("wb_job");
+  if (!j) { j = Math.random().toString(36).slice(2, 10); localStorage.setItem("wb_job", j); }
+  return j;
+})();
+
+async function upload(type, input, badge) {
+  const files = [...input.files];
+  if (!files.length) return;
+  for (const f of files) {
+    const fd = new FormData();
+    fd.append("type", type);
+    fd.append("file", f);
+    const r = await fetch("/api/upload?job=" + JOB, { method: "POST", body: fd });
+    if (!r.ok) { alert("上传失败：" + (await r.json()).error); return; }
+  }
+  badge.textContent = files.length === 1
+    ? "已选 " + files[0].name
+    : "已选 " + files.length + " 个文件";
+  badge.classList.add("ok");
+}
+
+$("ref").onchange     = () => upload("ref", $("ref"), $("ref-name"));
+$("footage").onchange = () => upload("footage", $("footage"), $("footage-name"));
+$("bgm").onchange     = () => upload("bgm", $("bgm"), $("bgm-name"));
+
+let pollTimer = null;
+
+$("run").onclick = async () => {
+  const body = {
+    job: JOB,
+    title: $("title").value.trim(),
+    end: $("end").value.trim(),
+    narration: $("narration").value.trim()
+  };
+  $("run").disabled = true;
+  $("result-card").classList.add("hidden");
+  $("log-card").classList.remove("hidden");
+  $("log-badge").textContent = "进行中";
+  $("log-badge").className = "badge running";
+  $("log").textContent = "正在启动...\n";
+
+  const r = await fetch("/api/run", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  });
+  const j = await r.json();
+  if (!r.ok) {
+    $("log-badge").textContent = "无法开始";
+    $("log-badge").className = "badge error";
+    $("log").textContent += "\n" + (j.error || "未知错误") + "\n";
+    $("run").disabled = false;
+    return;
+  }
+  pollTimer = setInterval(() => poll(j.job), 1000);
+};
+
+async function poll(job) {
+  const r = await fetch("/api/status/" + job);
+  if (!r.ok) return;
+  const s = await r.json();
+  const logEl = $("log");
+  logEl.textContent = s.log;
+  logEl.scrollTop = logEl.scrollHeight;
+  if (s.status === "done") {
+    clearInterval(pollTimer);
+    $("log-badge").textContent = "已完成";
+    $("log-badge").className = "badge done";
+    $("run").disabled = false;
+    if (s.outputs.length) {
+      const name = s.outputs[s.outputs.length - 1];
+      const url = "/api/video/" + job + "/" + encodeURIComponent(name);
+      $("player").src = url;
+      $("download").href = url;
+      $("result-card").classList.remove("hidden");
+      $("player").scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    loadHistory();
+  } else if (s.status === "error") {
+    clearInterval(pollTimer);
+    $("log-badge").textContent = "失败";
+    $("log-badge").className = "badge error";
+    $("run").disabled = false;
+  }
+}
+
+async function loadHistory() {
+  const r = await fetch("/api/history");
+  const j = await r.json();
+  const box = $("hist");
+  if (!j.items.length) { box.innerHTML = '<p class="note">还没有产物。</p>'; return; }
+  box.innerHTML = '<table class="hist">' + j.items.map(it =>
+    '<tr><td><a href="/api/video/' + it.job + '/' + encodeURIComponent(it.name) + '" target="_blank">' +
+    it.name + '</a></td><td class="sz">' + it.size + '</td></tr>'
+  ).join("") + "</table>";
+}
+loadHistory();
+</script>
+</body>
+</html>

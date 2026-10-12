@@ -47,6 +47,8 @@ deconstruct-rebuild-workbench/
    ├─ reference_analyzer.py  # 对标分析引擎（OpenCV + Tesseract + ffmpeg）
    ├─ replica_builder.py     # 复刻引擎（ffmpeg + edge-tts + 剪映草稿）
    ├─ paths.py               # 跨平台工具探测（ffmpeg/tesseract/skill 目录）
+   ├─ web_server.py          # 网页版后端（Flask，仅监听 127.0.0.1）
+   ├─ web/                   # 网页版前端（单页 HTML，无需构建）
    ├─ specs/                 # 分析产物示例
    └─ _selftest/             # 自测 fixtures：合成参考片 + 素材 + 已知真值
 ```
@@ -61,6 +63,7 @@ deconstruct-rebuild-workbench/
 # Python 依赖（三选一环境均可）
 pip install -r jianying-editor/requirements.txt
 pip install opencv-python pytesseract edge-tts
+pip install flask          # 网页版需要
 
 # 外部工具（二选一方式装上即可，paths.py 会自动探测）
 # ffmpeg：https://ffmpeg.org  （或 WinGet: winget install Gyan.FFmpeg）
@@ -85,7 +88,20 @@ python workbench\workbench.py auto "D:\参考\爆款.mp4" "D:\我的素材" --na
 
 `--narration` 接受文本或 txt 文件路径；不给则只出画面+BGM。`--bgm` 不给且 spec 判定有 BGM 时，自动生成 lo-fi 氛围乐垫底。
 
-### 3. 环境变量（可选）
+### 3. 网页版（推荐日常使用）
+
+不想记命令，就起一个本地网页，在浏览器里拖拽上传、填要求、点开始、看成片：
+
+```bat
+python workbench\web_server.py          :: 默认 http://127.0.0.1:8000
+```
+
+- 上传对标视频 + 多个素材 + 可选 BGM，填标题 / 旁白 / 片尾文字
+- 实时日志滚动，完成后成片内嵌播放 + 一键下载
+- 历史产物列表，随时回看
+- 服务**只监听 127.0.0.1**（仅本机可访问），关闭终端即停止
+
+### 4. 环境变量（可选）
 
 `workbench/paths.py` 按「环境变量 → PATH → 常见安装位置」的顺序自动解析，一般无需配置：
 

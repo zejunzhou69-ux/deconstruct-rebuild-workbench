@@ -112,7 +112,7 @@ def _parse(args):
     i = 0
     while i < len(args):
         if args[i].startswith("--"):
-            opts[args[i][2:]] = args[i + 1] if i + 1 < len(args) else ""
+            opts[args[i][2:].replace("-", "_")] = args[i + 1] if i + 1 < len(args) else ""
             i += 2
         else:
             rest.append(args[i])
@@ -139,7 +139,8 @@ if __name__ == "__main__":
                       opts.get("title", "我的复刻作品"),
                       opts.get("narration"), opts.get("bgm"),
                       opts.get("out", "成品"),
-                      opts.get("end", "感谢观看")) or 0)
+                      opts.get("end", "感谢观看"),
+                      opts.get("specs_dir", "specs")) or 0)
     elif cmd == "menu":
         menu()
     else:
