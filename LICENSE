@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 zejunzhou69-ux (dr-workbench contributors)
+Copyright (c) 2026 zejunzhou69-ux (deconstruct-rebuild-workbench contributors)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,7 @@ SOFTWARE.
 --------------------------------------------------------------------------------
 
 This repository is a combined work. This LICENSE covers the portions authored
-by the dr-workbench contributors (notably the `workbench/` directory).
+by the deconstruct-rebuild-workbench contributors (notably the `workbench/` directory).
 
 Third-party components bundled in this repository are distributed under their
 own original licenses, with copyright notices preserved in place:

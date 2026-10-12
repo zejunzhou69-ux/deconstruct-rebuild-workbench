@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# 本文件为 dr-workbench 新增代码（MIT），基于 jianying-editor 技能运行时二次开发，详见 NOTICE.md
+# 本文件为 deconstruct-rebuild-workbench 新增代码（MIT），基于 jianying-editor 技能运行时二次开发，详见 NOTICE.md
 """
 自动化剪辑工作台 · 对标复刻模式
 ================================

@@ -2,7 +2,7 @@
 """
 跨平台外部工具探测 (paths)
 ==========================
-本文件为 dr-workbench 新增代码（基于 jianying-editor MIT 技能的运行时二次开发）。
+本文件为 deconstruct-rebuild-workbench 新增代码（基于 jianying-editor MIT 技能的运行时二次开发）。
 
 解析优先级（每个工具都一样）：
   1. 环境变量显式指定

@@ -1,6 +1,6 @@
 # NOTICE
 
-本仓库 **dr-workbench** 是一个衍生（derivative）作品，由以下三部分组成。使用、复制或分发本仓库时，请同时遵守各组件的许可证条款。
+本仓库 **deconstruct-rebuild-workbench** 是一个衍生（derivative）作品，由以下三部分组成。使用、复制或分发本仓库时，请同时遵守各组件的许可证条款。
 
 ## 1. jianying-editor 技能本体（`jianying-editor/`）
 
@@ -23,7 +23,7 @@
 
 ## 3. 对标复刻工作台（`workbench/`）—— 本仓库新增部分
 
-- **许可证**：MIT License（版权归 dr-workbench 贡献者所有）
+- **许可证**：MIT License（版权归 deconstruct-rebuild-workbench 贡献者所有）
 - **内容**：`workbench.py`、`reference_analyzer.py`、`replica_builder.py`、`paths.py` 及 `_selftest/`、`specs/` 下的产物
 
 新增部分在运行时通过 `sys.path` 调用上述 jianying-editor / pyJianYingDraft
@@ -34,7 +34,7 @@
 
 - 对 jianying-editor 源码：**无修改**（仅清理缓存）。
 - 对 pyJianYingDraft 源码：**无修改**。
-- 新增文件均在文件头注明「本文件为 dr-workbench 新增代码」。
+- 新增文件均在文件头注明「本文件为 deconstruct-rebuild-workbench 新增代码」。
 
 感谢原作者的开源工作：
 

@@ -1,8 +1,8 @@
-# dr-workbench · 对标复刻自动化剪辑工作台
+# deconstruct-rebuild-workbench · 对标复刻自动化剪辑工作台
 
 > 喂一个对标视频，它教你拍什么、怎么拍，再用你自己的素材复刻出同款成片。
 
-**dr-workbench** 是一个基于开源项目 [jianying-editor](https://github.com/luoluoluo22/jianying-editor)（MIT）二次开发的视频剪辑自动化项目。它在原技能「自然语言驱动剪映」的能力之上，新增了一套 **对标复刻（Replica）流水线**：
+**deconstruct-rebuild-workbench** 是一个基于开源项目 [jianying-editor](https://github.com/luoluoluo22/jianying-editor)（MIT）二次开发的视频剪辑自动化项目。它在原技能「自然语言驱动剪映」的能力之上，新增了一套 **对标复刻（Replica）流水线**：
 
 ```
 ① 找对标                ② 拆解 + 教你怎么拍               ③ 投喂素材复刻
@@ -39,7 +39,7 @@
 ## 仓库结构
 
 ```
-dr-workbench/
+deconstruct-rebuild-workbench/
 ├─ jianying-editor/          # 原技能本体（MIT，源码原样保留，详见 NOTICE.md）
 │  └─ scripts/vendor/pyJianYingDraft/   # 内嵌剪映草稿引擎（Apache-2.0）
 └─ workbench/                # 【本项目的核心新增】对标复刻工作台
@@ -127,6 +127,6 @@ python workbench\workbench.py replicate "workbench\specs\ref_demo_spec.json" "wo
 |---|---|---|
 | `jianying-editor/` 技能本体 | MIT | [luoluoluo22](https://github.com/luoluoluo22) |
 | `scripts/vendor/pyJianYingDraft/` | Apache-2.0 | [GuanYixuan](https://github.com/GuanYixuan) |
-| `workbench/` 对标复刻流水线 | MIT（本仓库新增部分） | dr-workbench 贡献者 |
+| `workbench/` 对标复刻流水线 | MIT（本仓库新增部分） | deconstruct-rebuild-workbench 贡献者 |
 
 仓库根目录的 `LICENSE` 覆盖 `workbench/` 新增部分；第三方组件的原始 LICENSE 与版权声明在各自目录下原样保留。
