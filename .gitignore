@@ -1,0 +1,18 @@
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+
+# 工作台运行时输出
+workbench/成品/
+workbench/specs/_*/
+*.log
+
+# jianying-editor 运行时缓存（技能运行时会再生成）
+jianying-editor/assets/__jycache__/
+jianying-editor/data/jy_cached_audio.csv
+
+# 系统杂物
+.DS_Store
+Thumbs.db
+desktop.ini
